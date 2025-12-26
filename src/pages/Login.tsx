@@ -26,7 +26,7 @@ export default function Login() {
       setLoading(false); // 실패했을 때만 로딩 끄기
     } else {
       // 3. [핵심 수정] 성공 시 강제로 대시보드('/')로 이동시킵니다.
-      navigate('/'); 
+      navigate('/dashboard'); 
     }
   };
 
