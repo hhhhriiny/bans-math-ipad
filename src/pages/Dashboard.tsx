@@ -56,22 +56,14 @@ export default function Dashboard() {
                 오늘의 수업 일정을 한눈에 확인하고 학생들을 관리하세요.
               </p>
             </div>
-            <div>
-              <button 
-                className="text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md hover:opacity-90 flex items-center transition-all active:scale-95" 
-                style={{ backgroundColor: BRAND_COLOR }}
-                onClick={() => alert('수업 추가 기능은 설정 페이지에서 가능합니다.')}
-              >
-                <Plus size={18} className="mr-2"/> 수업 추가
-              </button>
-            </div>
+
           </div>
 
           {/* 주간 시간표 컴포넌트 */}
           <section>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                📅 주간 시간표
+                주간 시간표
               </h3>
               <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
                 수업을 클릭하여 출석/평가를 진행하세요
