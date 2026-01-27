@@ -7,8 +7,9 @@ import {
   Users, 
   Settings, 
   LogOut,
-  Menu, // 햄버거 메뉴 아이콘 추가
-  X     // 닫기 아이콘 추가
+  Menu, 
+  X,
+  FileText // [추가] 레포트 아이콘
 } from 'lucide-react';
 
 interface MainLayoutProps {
@@ -19,13 +20,14 @@ export default function MainLayout({ children }: MainLayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // 모바일 사이드바 열림/닫힘 상태 관리
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // [수정] 레포트 관리 메뉴 추가
   const menuItems = [
     { name: '홈', path: '/dashboard', icon: <LayoutDashboard size={20} /> },
     { name: '수업 관리', path: '/classes', icon: <BookOpen size={20} /> },
     { name: '원생 관리', path: '/students', icon: <Users size={20} /> },
+    { name: '레포트 관리', path: '/reports', icon: <FileText size={20} /> }, // 새로 추가됨
     { name: '수납 관리', path: '/payments', icon: <CreditCard size={20} /> },
     { name: '설정', path: '/settings', icon: <Settings size={20} /> },
   ];
@@ -34,7 +36,6 @@ export default function MainLayout({ children }: MainLayoutProps) {
     navigate('/');
   };
 
-  // 메뉴 클릭 시 모바일에서는 사이드바 닫기
   const handleMenuClick = (path: string) => {
     navigate(path);
     setIsSidebarOpen(false);
@@ -43,7 +44,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="flex h-screen bg-gray-100 font-sans overflow-hidden">
       
-      {/* 1. 모바일용 오버레이 (사이드바 열렸을 때 배경 어둡게) */}
+      {/* 1. 모바일 오버레이 */}
       {isSidebarOpen && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden transition-opacity"
@@ -51,7 +52,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         />
       )}
 
-      {/* 2. 사이드바 (Responsive) */}
+      {/* 2. 사이드바 */}
       <aside 
         className={`
           fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg flex flex-col border-r border-gray-200 transition-transform duration-300 ease-in-out
@@ -64,7 +65,6 @@ export default function MainLayout({ children }: MainLayoutProps) {
             <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold shadow-md">B</div>
             <h1 className="text-xl font-bold text-gray-800 tracking-tight">Ban's Math</h1>
           </div>
-          {/* 모바일에서만 보이는 닫기 버튼 */}
           <button 
             onClick={() => setIsSidebarOpen(false)}
             className="md:hidden text-gray-500 hover:text-gray-700"
@@ -106,12 +106,10 @@ export default function MainLayout({ children }: MainLayoutProps) {
         </div>
       </aside>
 
-      {/* 3. 메인 컨텐츠 영역 */}
+      {/* 3. 메인 컨텐츠 */}
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
-        {/* 헤더 */}
         <header className="bg-white h-16 shadow-sm flex items-center justify-between px-4 md:px-8 sticky top-0 z-10 border-b border-gray-100 shrink-0">
           <div className="flex items-center gap-3">
-            {/* 햄버거 버튼 (모바일 전용) */}
             <button 
               onClick={() => setIsSidebarOpen(true)}
               className="md:hidden p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-lg"
@@ -132,7 +130,6 @@ export default function MainLayout({ children }: MainLayoutProps) {
           </div>
         </header>
         
-        {/* 컨텐츠 스크롤 영역 */}
         <div className="flex-1 overflow-y-auto p-4 md:p-8">
           <div className="max-w-7xl mx-auto w-full pb-20">
             {children}

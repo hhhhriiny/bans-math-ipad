@@ -14,14 +14,20 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        
+        <Route path="/classes" element={<ClassManager />} />
+        
         <Route path="/students" element={<StudentManager />} /> 
-        <Route path="/Classes" element={<ClassManager />} />
         <Route path="/students/:id" element={<StudentDetail />} />
-        <Route path="/payments" element={<PaymentManager />} />
-        <Route path="/Settings" element={<Settings />} />
-        {/* <Route path="/classes" element={<ClassManager />} /> */}
-        {/* <Route path="/settings" element={<Settings />} /> */}
+        
+        {/* [추가] 사이드바 '레포트 관리' 클릭 시 이동할 경로 */}
+        <Route path="/reports" element={<Report />} />
+        
+        {/* [유지] 학부모 공유용 등 특정 ID로 접근할 때 (필요시 사용) */}
         <Route path="/report/:id" element={<Report />} />
+
+        <Route path="/payments" element={<PaymentManager />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
   );
